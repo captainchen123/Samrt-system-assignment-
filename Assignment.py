@@ -15,20 +15,21 @@ bt = "AAAAAAAAAAAAAAAAAAAAABx5hgEAAAAATZmJf8E%2FJ9gpDZ4DDIMmOsXhseo" \
      "%3Dn8S0Y5VCbf3tnAhBPORztxSYuNNiLsvt0Qs3p8j2XP8uv3qWGa "
 client = Client(bearer_token=bt)
 
-# using tweepy paginator to get over 100 last tweets from twitter api
+# using tweepy paginator to get over the number of tweets users want to from Twitter api
 tweets = []
 for tweet in tweepy.Paginator(client.search_recent_tweets, query=query,
                               tweet_fields=['id', 'created_at', 'public_metrics', 'text', 'source'],
                               max_results=100).flatten(limit=num_tweets):
     tweets.append(tweet)
 
-# print 5  tweets from Twitter api
+# print 10  tweets from Twitter api
 print(num_tweets, "tweets from twitter api")
-print("5 tweets from twitter api")
+print("10 tweets from twitter api")
 print('-----------------------------------------')
 for tweet in tweets[:10]:
     print(tweet.text)
     print()
+print("\n")
 
 # create a Pandas dataframe
 data = pd.DataFrame(data=[tweet.text for tweet in tweets], columns=['Tweets'])
